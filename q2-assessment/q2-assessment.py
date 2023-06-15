@@ -73,3 +73,34 @@ class Recipe:
 # 
 # create classes to model `Species`, `Predator`, `Prey`, etc., and think about how
 # these classes might relate to each other through inheritance.
+
+
+# input=species,characteristics,behaviours
+# output=different species,different behaviours
+# process=create class Animals,create constructor,create methods
+class Animals:
+    def __init__(self,species,characteristics,behaviours):
+        self.species=species
+        self.characteristics=characteristics
+        self.behaviours=behaviours
+    def different_species(self):
+        if self.species=="predators" and self.behaviours=="migration":
+            print({f"the {self.species} will {self.behaviours} from one point to another"})
+        elif self.species=="preys" and self.characteristics=="stay":
+            print({f"the {self.species} will{self.characteristics}"})
+        else:print({"no predators nor preys"})
+
+    def predators(self):
+        if self.species=="predators" and self.behaviours=="migration":
+            print({f"the {self.species} will {self.behaviours} from one point to another"})
+        elif self.species=="preys" and self.characteristics=="stay":
+            print({f"the {self.species} will{self.characteristics}"})
+        else:print({"no predators nor preys"})
+    def preys(self):
+        if self.species=="predators" and self.behaviours=="migration":
+            print({f"the {self.species} will {self.behaviours} from one point to another"})
+        elif self.species=="preys" and self.characteristics=="stay":
+            print({f"the {self.species} will{self.characteristics}"})
+        else:print({"no predators nor preys"})
+    preys1=different_species("zebras")
+    print(preys1)
