@@ -99,3 +99,48 @@ class Recipe{
  
 //  create classes to model `Species`, `Predator`, `Prey`, etc., and think about how
 //  these classes might relate to each other through inheritance.
+class Animals{
+    constructor(species,characteristics,behaviours){
+        this.species=species
+        this.characteristics=characteristics
+        this.behaviours=behaviours
+    }
+    different_species(){
+        if (this.species=="predators" && this.behaviours=="migration"){
+            console.log(`the ${self.species} will ${self.behaviours} from one point to another`)
+        }
+    else if(this.species=="preys"&&this.characteristics=="stay"){
+        console.log(`the {self.species} will{self.characteristics}`)
+    }
+    else{
+        console.log("no predators nor preys")
+     
+        }
+    }
+    predators(){
+        if (this.species=="predators" && this.behaviours=="migration"){
+            console.log(`the ${self.species} will ${self.behaviours} from one point to another`)
+        }
+    else if(this.species=="preys"&&this.characteristics=="stay"){
+        console.log(`the {self.species} will{self.characteristics}`)
+    }
+    else{
+        console.log("no predators nor preys")
+     
+        }
+    }
+    prey(){
+        if (this.species=="predators" && this.behaviours=="migration"){
+            console.log(`the ${self.species} will ${self.behaviours} from one point to another`)
+        }
+    else if(this.species=="preys"&&this.characteristics=="stay"){
+        console.log(`the {self.species} will{self.characteristics}`)
+    }
+    else{
+        console.log("no predators nor preys")
+     
+        }
+    }
+}
+prey1=new Animals()
+console.log({prey1})
