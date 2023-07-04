@@ -12,73 +12,63 @@
 //  input=length,moral-lessons,age-group,story
 //  output=story_objects,story-teller_objects,translator_objects
 // process=create a class Story,storyteller and translator;pass in the attributes that inherits from the class
-
-// class StoryTeller extends Story {
-//     constructor(title, moral_lesson, age_group, community_origin, storyteller_name, story_length) {
-//       super(title, moral_lesson, age_group, story_length);
-//       this.community_origin = community_origin;
-//       this.storyteller_name = storyteller_name;
-//     }
-//   }
-//   class Translator extends Story {
-//     constructor(title, moral_lesson, age_group, story_length, origin_language, new_language) {
-//       super(title, moral_lesson, age_group, story_length);
-//       this.origin_language = origin_language;
-//       this.new_language = new_language;
-//     }
-//   }
-//   const story = new Story("The cat and the mouse", "Greediness", 5, "10 pages");
-//   console.log(story.display_details());
-//   const storyteller = new StoryTeller("The tortoise and the rabbit", "Friendship", 8, "English", "Lilian", 200);
-//   console.log(storyteller.display_details());
-//   console.log(`Storyteller Name: ${storyteller.storyteller_name}`);
-//   console.log(`Community Origin: ${storyteller.community_origin}`);
-//   const translator = new Translator("Africana", "diversity", 6, "20 pages", "swahili", "English");
-//   console.log(translator.display_details());
-//   console.log(`Origin Language: ${translator.origin_language}`);
-//   console.log(`New Language: ${translator.new_language}`);
-
-
-  class Story {
-    constructor(story_length, moral_lessons, age_group, title) {
-      this.story_length = story_length;
-      this.moral_lessons = moral_lessons;
-      this.age_group = age_group;
-      this.title = title;
+class Story {
+  constructor(story_length, moral_lessons, age_group, title) {
+    this.story_length = story_length;
+    this.moral_lessons = moral_lessons;
+    this.age_group = age_group;
+    this.title = title;
+    if (this.age_group >= 7) {
+      this.origin_language = "English";
+    } else {
+      this.origin_language = "French";
     }
-    
-    display_details() {
-      console.log(`${this.title} is a story for children who are ${this.age_group} years old. It is ${this.story_length} long and has ${this.moral_lessons} moral lessons.`);
+    if (this.moral_lessons == 2) {
+      this.new_language = "Swahili";
+    } else {
+      this.new_language = "Zulu";
     }
   }
-  
-  class StoryTeller extends Story {
-    constructor(community_origin, storyteller_name, story_length, moral_lessons, age_group, title) {
-      super(story_length, moral_lessons, age_group, title);
-      this.community_origin = community_origin;
-      this.storyteller_name = storyteller_name;
+  display_details() {
+    console.log(`${this.title} is a story for children who are ${this.age_group} years old. It is ${this.story_length} pages long and has ${this.moral_lessons} moral lessons. It was originally written in ${this.origin_language} and has been translated to ${this.new_language}.`);
+  }
+}
+
+class StoryTeller extends Story {
+  constructor(community_origin, storyteller_name, story_length, moral_lessons, age_group, title, story_limit) {
+    super(story_length, moral_lessons, age_group, title);
+    this.community_origin = community_origin;
+    this.storyteller_name = storyteller_name;
+    this.story_limit = story_limit;
+    if (this.story_length < 10) {
+      this.language = "English";
+    } else {
+      this.language = "Swahili";
     }
   }
-  
-  class Translator extends Story {
-    constructor(title, story_length, moral_lessons, age_group, origin_language, new_language) {
-      super(story_length, moral_lessons, age_group, title);
-      this.origin_language = origin_language;
-      this.new_language = new_language;
+  display_details() {
+    console.log(`${this.storyteller_name} from ${this.community_origin} tells the story of ${this.title} in ${this.language} and the story limit is ${this.story_limit}.`);
+  }
+}
+
+class Translator extends Story {
+  constructor(title, story_length, moral_lessons, age_group, origin_language, new_language) {
+    super(story_length, moral_lessons, age_group, title);
+    this.origin_language = origin_language;
+    this.new_language = new_language;
+    if (this.age_group < 10) {
+      this.language_level = "Beginner";
+    } else {
+      this.language_level = "Intermediate";
     }
   }
-  
-  const story = new Story(10, 3, 7, "The hare and elephant");
-  story.display_details();
-  
-  const storyteller = new StoryTeller("Kamba", "Cynthia Mumbua", 12, 4, 10, "How the hare was clever than elephant");
-  console.log(`${storyteller.storyteller_name} from ${storyteller.community_origin} tells the story of ${storyteller.title}.`);
-  storyteller.display_details();
-  
-  const translator = new Translator("Clever", 8, 2, 12, "Swahili", "English");
-  console.log(`The story '${translator.title}' which is ${translator.story_length} long and has ${translator.moral_lessons} moral lessons originally in ${translator.origin_language} has been translated to ${translator.new_language}.`);
-  translator.display_details();
-  
+  display_details() {
+    console.log(`The story '${this.title}' which is ${this.story_length} pages long and has ${this.moral_lessons} moral lessons was originally written in ${this.origin_language} and translated to ${this.new_language}`)
+
+  }
+}
+const story1 = new Story(10, "hare is clever", 10, "hare and hyena")
+story1.display_details()
 // q2
 // **African Cuisine:** You're creating a recipe app specifically for African cuisine.
 // The app needs to handle recipes from different African countries, each with its
@@ -88,35 +78,70 @@
 // `EthiopianRecipe`, `NigerianRecipe`), each with their own unique properties and
 // methods.
 
-// input=recipes(ingredients,preparation time,cooking method,nutritional information)
-// output=types of recipes
-//  process=create a class Recipe,pass in the attributes,create methods and their subclasses
-
-
-// class Recipe{
-//     constructor(ingredients,preparation_time,cooking_method,nutritional_information ){
-//         this.ingredients=ingredients
-//         this.nutritional_information=nutritional_information
-//        this.cooking_method=cooking_method
-//         this.self.preparation_time=preparation_time
-//     }
-//     recipes(){
-//         if (this.ingredients=="chillie" && this.cooking_method=="boiling" && this.nutritional_information=="healthy" && this.preparation_time=="morning"){
-//             console.log("the food is moroccanRecipe")
-//         }
-//          else if( this.cooking_method=="roasting" && this.ingredients=="meat" && this.nutritional_information=="healthier" && this.preparation_time=="late"){
-//             console.log("the food was ethiopianRecipe")
-//          }
-         
-//             else{
-//                 console.log("the food was nigerianRecipe")
-//     }
-    
-// }
-    
-// }
-//  const recipe1=new Recipe("any","noon","boiling","healthy")
-//  console.log(recipe1)
+// input=ingredients,preparation time,cooking method,nutritional information
+// output=different types of recipes(moroccanRecipe,EthiopianRecipe,NigerianRecipe)
+//  process=create a class Recipe,create subclasses,pass in the attributes,create methods and their subclasses
+class Recipe {
+  constructor(country) {
+    this.country = country;
+  }
+   prepare_recipe() {
+    if (this.country === "Morocco") {
+      this.moroccan_recipe();
+    } else if (this.country === "Ethiopia") {
+      this.ethiopian_recipe();
+    } else if (this.country === "Nigeria") {
+      this.nigerian_recipe();
+    } else {
+      console.log("Recipe not available.");
+    }
+  }
+  moroccan_recipe() {
+    console.log("Make a Moroccan recipe.");
+  }
+   ethiopian_recipe() {
+    console.log("Make an Ethiopian recipe.");
+  }
+   nigerian_recipe() {
+    console.log("Make a Nigerian recipe.");
+  }
+}
+ const country = prompt("Enter a country: ");
+const recipe = new Recipe(country);
+recipe.prepare_recipe();
+ if (country === "Nigeria") {
+    console.log("The Nigerian recipe is:");
+    console.log("Step 1: Gather ingredients");
+    console.log("Step 2: Season the chicken with spices and let it marinate.");
+    console.log("Step 3:  Add onions, garlic, and peppers in a pot.");
+    console.log("Step 4: Add the chicken");
+    console.log("Step 5: Stir");
+    console.log("Step 6: Serve.");
+    console.log("It takes 60 mins.");
+}
+else if(country === "Ethiopia"){
+    console.log("The Ethiopian recipe is:");
+    console.log("Step 1: Gather ingredients");
+    console.log("Step 2: Season the chicken with spices and let it marinate.");
+    console.log("Step 3:  Add onions, garlic, and peppers in a pot.");
+    console.log("Step 4: Add the chicken");
+    console.log("Step 5: Stir");
+    console.log("Step 6: Serve.");
+    console.log("It takes 60 mins.");
+}
+else if(country === "Moroccan"){
+    console.log("The Ethiopian recipe is:");
+    console.log("Step 1: Gather ingredients");
+    console.log("Step 2: Season the chicken with spices and let it marinate.");
+    console.log("Step 3:  Add onions, garlic, and peppers in a pot.");
+    console.log("Step 4: Add the chicken");
+    console.log("Step 5: Stir");
+    console.log("Step 6: Serve.");
+     console.log("It takes 60 mins.");
+ }
+ else{
+     console.log("Recipe is unavailable");
+ }
 
 //  **Wildlife Preservation:** You're a wildlife conservationist working on a
 //  program to track different species in a national park. Each species has its own
@@ -125,48 +150,177 @@
  
 //  create classes to model `Species`, `Predator`, `Prey`, etc., and think about how
 //  these classes might relate to each other through inheritance.
-// class Animals{
-//     constructor(species,characteristics,behaviours){
-//         this.species=species
-//         this.characteristics=characteristics
-//         this.behaviours=behaviours
-//     }
-//     different_species(){
-//         if (this.species=="predators" && this.behaviours=="migration"){
-//             console.log(`the ${self.species} will ${self.behaviours} from one point to another`)
-//         }
-//     else if(this.species=="preys"&&this.characteristics=="stay"){
-//         console.log(`the {self.species} will{self.characteristics}`)
-//     }
-//     else{
-//         console.log("no predators nor preys")
-     
-//         }
-//     }
-//     predators(){
-//         if (this.species=="predators" && this.behaviours=="migration"){
-//             console.log(`the ${self.species} will ${self.behaviours} from one point to another`)
-//         }
-//     else if(this.species=="preys"&&this.characteristics=="stay"){
-//         console.log(`the {self.species} will{self.characteristics}`)
-//     }
-//     else{
-//         console.log("no predators nor preys")
-     
-//         }
-//     }
-//     prey(){
-//         if (this.species=="predators" && this.behaviours=="migration"){
-//             console.log(`the ${self.species} will ${self.behaviours} from one point to another`)
-//         }
-//     else if(this.species=="preys"&&this.characteristics=="stay"){
-//         console.log(`the {self.species} will{self.characteristics}`)
-//     }
-//     else{
-//         console.log("no predators nor preys")
-     
-//         }
-//     }
-// }
-// prey1=new Animals()
-// console.log({prey1})
+class Species {
+  constructor(name, diet, lifespan) {
+      this.name = name;
+      this.diet = diet;
+      this.lifespan = lifespan;
+  }
+
+  getName() {
+      return this.name;
+  }
+
+  getDiet() {
+      return this.diet;
+  }
+
+  getLifespan() {
+      return this.lifespan;
+  }
+}
+class Predator extends Species {
+  constructor(name, diet, lifespan, preyList) {
+      super(name, diet, lifespan);
+      this.preyList = preyList;
+  }
+
+  getPreyList() {
+      return this.preyList;
+  }
+}
+class Prey extends Species {
+  constructor(name, diet, lifespan, predatorList) {
+      super(name, diet, lifespan);
+      this.predatorList = predatorList;
+  }
+
+  getPredatorList() {
+      return this.predatorList;
+  }
+}
+const cheetah = new Predator("cheetah", "Carnivore", 15, ["Antelope", "Gazelle"]);
+const antelope = new Prey("antelope", "Herbivore", 20, ["leopard", "Hyena"]);
+console.log(cheetah.getName());
+console.log(cheetah.getDiet());
+console.log(cheetah.getLifespan());
+console.log(cheetah.getPreyList());
+console.log(antelope.getName());
+console.log(antelope.getDiet());
+console.log(antelope.getLifespan());
+console.log(antelope.getPredatorList());
+
+// **African Music Festival:** You're in charge of organizing a Pan-African music
+// festival. Many artists from different countries, each with their own musical style
+// and instruments, are scheduled to perform. You need to write a program to
+// manage the festival lineup, schedule, and stage arrangements. Think about how
+// you might model the `Artist`, `Performance`, and `Stage` classes, and consider
+// how you might use inheritance if there are different types of performances or
+// stages.
+
+// Create a class called Product with attributes for name, price, and quantity.
+// Implement a method to calculate the total value of the product (price * quantity).
+// Create multiple objects of the Product class and calculate their total values.
+class Product{
+  constructor(name,price,quantity){
+    this.name = name
+    this.price = price
+    this.quantity = quantity
+  }
+  calculateTotalPrice(){
+    let totalPrice = this.quantity * this.price;
+    return `The total amount for the products is ${totalPrice}`
+  }
+ }
+ let books= new Product("books",80.00,10)
+ let rulers= new Product("rulers",30.00,5)
+ let sharpeners= new Product("sharpeners",15.00,10)
+ console.log(books.calculateTotalPrice());
+ console.log(rulers.calculateTotalPrice());
+ console.log(sharpeners.calculateTotalPrice());
+
+//  Implement a class called Student with attributes for name, age, and grades (a
+  // list of integers). Include methods to calculate the average grade, display the
+  // student information, and determine if the student has passed (average grade >=
+  // 60). Create objects for the Student class and demonstrate the usage of these
+  // Methods.
+  class Student {
+    constructor(name, age, grades) {
+      this.name = name;
+      this.age = age;
+      this.grades = grades;
+    }
+ 
+    display_info() {
+      return "Hello, I am ${this.name} and I am ${this.age} years old.";
+    }
+    calculate_grade() {
+      let total_grades = 0;
+      for (let grade of this.grades) {
+        total_grades += grade;
+      }
+      const ave_grade = total_grades / this.grades.length;
+      return ave_grade;
+    }
+    pass_mark() {
+      const ave_grade = this.calculate_grade();
+      if (ave_grade >= 60) {
+        return `Congratulations, ${this.name}! You have passed.`;
+      } else {
+        return `${this.name}, you have not attained the passmark. Work harder! `;
+      }
+    }
+  }   
+
+njeri =new Student("Njeri",24,[40,50,80,72,48,90])
+console.log(njeri.display_info())
+console.log(njeri.calculate_grade())
+console.log(njeri.pass_mark())
+
+// Create a FlightBooking class that represents a flight booking system. Implement
+// methods to search for available flights based on destination and date, reserve
+// seats for customers, manage passenger information, and generate booking
+// confirmations
+class FlightBooking {
+
+    constructor(flights) {
+        this.flights = flights;
+    }
+
+    searchFlights(destination, date) {
+        for (let flight of this.flights) {
+            if (flight.destination === destination && flight.date === date) {
+                return flight;
+            }
+        }
+        return null;
+    }
+
+    reserveSeat(flight, passengerName, passengerEmail) {
+        if (!this.flights.includes(flight)) {
+            throw new Error("Flight not found");
+        }
+        if (flight.isFull()) {
+            throw new Error("Flight is full");
+        }
+        flight.passengers.push({
+            "name": passengerName,
+            "email": passengerEmail
+        });
+    }
+
+    managePassengerInformation(flight, passengerName, field, newValue) {
+        for (let passenger of flight.passengers) {
+            if (passenger.name === passengerName) {
+                if (field === "name") {
+                    passenger.name = newValue;
+                } else if (field === "email") {
+                    passenger.email = newValue;
+                } else {
+                    throw new Error("Invalid field");
+                }
+            }
+        }
+    }
+
+    generateBookingConfirmation(flight) {
+        return `Your booking for flight ${flight.id} has been confirmed.\n` +
+            `Departure: ${flight.departureAirport}\n` +
+            `Arrival: ${flight.arrivalAirport}\n` +
+            `Date: ${flight.date}\n` +
+            `Passengers:\n` +
+            "\n".join([`${passenger.name} (${passenger.email})` for (passenger in flight.passengers]));
+    }
+
+}
+
