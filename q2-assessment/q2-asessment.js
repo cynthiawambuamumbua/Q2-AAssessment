@@ -313,14 +313,88 @@ class FlightBooking {
         }
     }
 
-    generateBookingConfirmation(flight) {
-        return `Your booking for flight ${flight.id} has been confirmed.\n` +
-            `Departure: ${flight.departureAirport}\n` +
-            `Arrival: ${flight.arrivalAirport}\n` +
-            `Date: ${flight.date}\n` +
-            `Passengers:\n` +
-            "\n".join([`${passenger.name} (${passenger.email})` for (passenger in flight.passengers]));
-    }
+    // generateBookingConfirmation(flight) {
+    //     return `Your booking for flight ${flight.id} has been confirmed.\n` +
+    //         `Departure: ${flight.departureAirport}\n` +
+    //         `Arrival: ${flight.arrivalAirport}\n` +
+    //         `Date: ${flight.date}\n` +
+    //         `Passengers:\n` +
+    //         "\n".join([`${passenger.name} (${passenger.email})` for (passenger in flight.passengers]));
+    // }
 
 }
+
+
+// Create a LibraryCatalog class that handles the cataloguing and management of
+// books in a library. Implement methods to add new books, search for books by
+// title or author, keep track of available copies, and display book details.
+class Book {
+  constructor(title, author, copies) {
+    this.title = title;
+    this.author = author;
+    this.copies = copies;
+  }
+
+  displayDetails() {
+    console.log(`Title: ${this.title}, Author: ${this.author}, Copies Available: ${this.copies}`);
+  }
+}
+
+class LibraryCatalog {
+  constructor() {
+    this.books = [];
+  }
+
+  addBook(title, author, copies) {
+    let book = new Book(title, author, copies);
+    this.books.push(book);
+  }
+
+  searchByTitle(title) {
+    for (let book of this.books) {
+      if (book.title.toLowerCase() === title.toLowerCase()) {
+        return book;
+      }
+    }
+    return null;
+  }
+
+  searchByAuthor(author) {
+    for (let book of this.books) {
+      if (book.author.toLowerCase() === author.toLowerCase()) {
+        return book;
+      }
+    }
+    return null;
+  }
+
+  displayAllBooks() {
+    for (let book of this.books) {
+      book.displayDetails();
+    }
+  }
+}
+
+let catalog = new LibraryCatalog();
+
+catalog.addBook("To Kill a Mockingbird", "Harper Lee", 2);
+catalog.addBook("1984", "George Orwell", 3);
+catalog.addBook("Pride and Prejudice", "Jane Austen", 1);
+
+
+let book = catalog.searchByTitle("To Kill a Mockingbird");
+if (book) {
+  book.displayDetails();
+} else {
+  console.log("Book not found");
+}
+
+book = catalog.searchByAuthor("George Orwell");
+if (book) {
+  book.displayDetails();
+} else {
+  console.log("Book not found");
+}
+
+catalog.displayAllBooks();
 

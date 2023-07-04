@@ -336,3 +336,82 @@ if flight:
 booking_confirmation = flight_booking.generate_booking_confirmation(flight)
 
 print(booking_confirmation)
+
+
+#  Create a LibraryCatalog class that handles the cataloguing and management of
+# books in a library. Implement methods to add new books, search for books by
+# title or author, keep track of available copies, and display book details.
+
+
+class Book:
+    def __init__(self, title, author, copies):
+        self.title = title
+        self.author = author
+        self.copies = copies
+
+    def display_details(self):
+        print(f"Title: {self.title}, Author: {self.author}, Copies Available: {self.copies}")
+
+
+class LibraryCatalog:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self, title, author, copies):
+        book = Book(title, author, copies)
+        self.books.append(book)
+
+    def search_by_title(self, title):
+        for book in self.books:
+            if book.title.lower() == title.lower():
+                return book
+        return None
+
+    def search_by_author(self, author):
+        for book in self.books:
+            if book.author.lower() == author.lower():
+                return book
+        return None
+
+    def display_all_books(self):
+        for book in self.books:
+            book.display_details()
+catalog = LibraryCatalog()
+
+
+catalog.add_book("To Kill a Mockingbird", "Harper Lee", 2)
+catalog.add_book("1984", "George Orwell", 3)
+catalog.add_book("Pride and Prejudice", "Jane Austen", 1)
+
+
+book = catalog.search_by_title("To Kill a Mockingbird")
+if book:
+    book.display_details()
+else:
+    print("Book not found")
+
+book = catalog.search_by_author("George Orwell")
+if book:
+    book.display_details()
+else:
+    print("Book not found")
+
+catalog.display_all_books()
+catalog = LibraryCatalog()
+
+catalog.add_book("To Kill a Mockingbird", "Harper Lee", 2)
+catalog.add_book("1984", "George Orwell", 3)
+catalog.add_book("Pride and Prejudice", "Jane Austen", 1)
+
+book = catalog.search_by_title("To Kill a Mockingbird")
+if book:
+    book.display_details()
+else:
+    print("Book not found")
+
+book = catalog.search_by_author("George Orwell")
+if book:
+    book.display_details()
+else:
+    print("author found")
+
